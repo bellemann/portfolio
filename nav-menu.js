@@ -26,10 +26,8 @@ const toggleMenu = () => {
   }
 };
 
-navButton.addEventListener("click", (event) => {
-  event.stopPropagation(); // Prevent the click from bubbling up to blackoutMenu
-  toggleMenu();
-});
+navButton.addEventListener("click", toggleMenu);
+navButton.addEventListener("touchstart", toggleMenu); // Handle touch events for mobile
 
 blackoutMenu.addEventListener("click", () => {
   if (menuOpen) {
@@ -42,7 +40,7 @@ slideMenu.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-//add menu link hover interaction
+// Add touch event handling for menu link hover interaction
 document.querySelectorAll(".navbar_linkblock").forEach((item) => {
   item.addEventListener("mouseenter", () => {
     // Animate the hovered item
@@ -76,6 +74,25 @@ document.querySelectorAll(".navbar_linkblock").forEach((item) => {
     document.querySelectorAll(".navbar_linkblock").forEach((el) => {
       if (el !== item) {
         gsap.to(el, { opacity: 1, duration: 0.3 });
+      }
+    });
+  });
+
+  // Add touch event handling for mobile
+  item.addEventListener("touchstart", () => {
+    // Animate the touched item
+    gsap.to(item, {
+      backgroundColor: "#4734f7",
+      color: "#fff",
+      duration: 0.3,
+      paddingLeft: "1.5rem", // Reset left padding
+      paddingRight: "1.5rem", // Reset right padding
+    });
+
+    // Dim other items
+    document.querySelectorAll(".navbar_linkblock").forEach((el) => {
+      if (el !== item) {
+        gsap.to(el, { opacity: 0.3, duration: 0.3 });
       }
     });
   });
