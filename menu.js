@@ -116,3 +116,68 @@ document.addEventListener("keydown", (e) => {
     closeMenu();
   }
 });
+
+
+document.querySelectorAll(".navbar_linkblock").forEach((item) => {
+  item.addEventListener("mouseenter", () => {
+    gsap.to(item, {
+      backgroundColor: "#4734f7",
+      color: "#fff",
+      duration: 0.3,
+      paddingLeft: "1.5rem",
+      paddingRight: "1.5rem",
+    });
+    document.querySelectorAll(".navbar_linkblock").forEach((el) => {
+      if (el !== item) {
+        gsap.to(el, { opacity: 0.5, duration: 0.3 });
+      }
+    });
+  });
+
+  item.addEventListener("mouseleave", () => {
+    gsap.to(item, {
+      backgroundColor: "",
+      color: "",
+      duration: 0.3,
+      paddingLeft: "0rem",
+      paddingRight: "0rem",
+    });
+    document.querySelectorAll(".navbar_linkblock").forEach((el) => {
+      if (el !== item) {
+        gsap.to(el, { opacity: 1, duration: 0.3 });
+      }
+    });
+  });
+
+  item.addEventListener("touchstart", () => {
+    gsap.to(item, {
+      backgroundColor: "#4734f7",
+      color: "#fff",
+      duration: 0.3,
+      paddingLeft: "1.5rem",
+      paddingRight: "1.5rem",
+    });
+    document.querySelectorAll(".navbar_linkblock").forEach((el) => {
+      if (el !== item) {
+        gsap.to(el, { opacity: 0.3, duration: 0.3 });
+      }
+    });
+  });
+});
+
+// Navbar up and down scroll
+let lastScrollTop = 0;
+
+function scrollDirectionHandler() {
+  let st = window.pageYOffset || document.documentElement.scrollTop;
+  let direction = st > lastScrollTop ? "down" : "up";
+  lastScrollTop = st <= 0 ? 0 : st;
+
+  if (direction === "down") {
+    gsap.to(".navbar10_component", { y: "-4rem" });
+  } else {
+    gsap.to(".navbar10_component", { y: "0rem" });
+  }
+}
+
+window.addEventListener("scroll", scrollDirectionHandler);
