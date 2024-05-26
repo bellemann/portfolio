@@ -106,7 +106,7 @@ hamburger.addEventListener("click", () => {
 });
 
 menuBackground.addEventListener("click", (e) => {
-  if (e.target === menuBackground) {
+  if (e.target === menuOverlay) {
     closeMenu();
   }
 });
